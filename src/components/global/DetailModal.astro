@@ -1,0 +1,254 @@
+---
+import { Image } from "astro:assets";
+import { workEntries } from "@/data/work";
+import { projects } from "@/data/projects";
+
+// Work cover images
+import imgStarburst from "@/images/work/starburstproject.jpeg";
+import imgAirbus   from "@/images/work/airbusproject.jpg";
+import imgAco      from "@/images/work/acoproject.jpg";
+
+// Work logos
+import logoStarburst from "@/images/logos/starburst.png";
+import logoAirbus    from "@/images/logos/airbus.png";
+import logoAco       from "@/images/logos/aco.png";
+
+// Project cover images
+import imgUav    from "@/images/projects/uavproject.jpeg";
+import imgPrice  from "@/images/projects/pricepredictionproject.jpg";
+import imgAvd    from "@/images/projects/vehicledesignproject.jpeg";
+import imgPrint  from "@/images/projects/3dprintingproject.jpg";
+import imgLutlab from "@/images/projects/lutlabproject.png";
+import imgDiy    from "@/images/projects/diyproject.png";
+
+const workImgMap: Record<string, ImageMetadata> = {
+  starburst:            imgStarburst,
+  "airbus-helicopters": imgAirbus,
+  "aco-le-mans":        imgAco,
+};
+
+const workLogoMap: Record<string, ImageMetadata> = {
+  starburst:            logoStarburst,
+  "airbus-helicopters": logoAirbus,
+  "aco-le-mans":        logoAco,
+};
+
+const workLogoW: Record<string, number> = {
+  starburst: 560, "airbus-helicopters": 560, "aco-le-mans": 120,
+};
+const workLogoH: Record<string, number> = {
+  starburst: 104, "airbus-helicopters": 104, "aco-le-mans": 120,
+};
+// Modal background is white → logos must be dark (brightness-0 = black, no invert)
+const workLogoClass: Record<string, string> = {
+  starburst:            "h-10 w-auto max-w-[240px] object-contain brightness-0",
+  "airbus-helicopters": "h-8  w-auto max-w-[180px] object-contain brightness-0",
+  "aco-le-mans":        "h-14 w-auto max-w-[56px]  object-contain brightness-0",
+};
+
+const projectImgMap: Record<string, ImageMetadata> = {
+  "uav-coastal-surveillance": imgUav,
+  "ai-ticket-forecasting":    imgPrice,
+  "avd-project":              imgAvd,
+  "3d-printing":              imgPrint,
+  lutlab:                     imgLutlab,
+  "diy-projects":             imgDiy,
+};
+---
+
+<!-- ── Backdrop (click-outside area) ─────────────────────── -->
+<div
+  id="detail-backdrop"
+  class="fixed inset-0 bg-black/55 backdrop-blur-sm z-[60]"
+  aria-hidden="true"
+></div>
+
+<!-- ── Modal shell ─────────────────────────────────────────── -->
+<div
+  id="detail-modal"
+  role="dialog"
+  aria-modal="true"
+  class="fixed
+    top-3 bottom-3 left-3 right-3
+    lg:top-[4vh] lg:bottom-[4vh] lg:left-[10vw] lg:right-[10vw]
+    bg-white rounded-[28px] z-[61] flex flex-col shadow-2xl"
+>
+  <!-- Sticky header bar -->
+  <div class="shrink-0 flex items-center justify-between px-8 lg:px-12 py-5 border-b border-neutral-100">
+    <span
+      id="detail-modal-title"
+      class="text-xs uppercase tracking-widest text-neutral-400 font-medium"
+    ></span>
+    <button
+      id="detail-close"
+      aria-label="Close"
+      class="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200
+             flex items-center justify-center
+             transition-colors duration-150 cursor-pointer text-neutral-500 hover:text-neutral-800"
+    >
+      <!-- × icon -->
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable content area (min-h-0 keeps flex child scrollable) -->
+  <div id="detail-body" class="overflow-y-auto overscroll-contain flex-1 min-h-0">
+
+    <!-- ── WORK PANELS ──────────────────────────────────────── -->
+    {workEntries.map((entry) => (
+      <div id={"panel-work-" + entry.slug} class="detail-panel hidden px-8 lg:px-12 py-10 lg:py-14">
+
+        <!-- Company logo -->
+        <div class="mb-8 pb-8 border-b border-neutral-100">
+          <Image
+            src={workLogoMap[entry.slug]}
+            alt={entry.company + " logo"}
+            width={workLogoW[entry.slug]}
+            height={workLogoH[entry.slug]}
+            class={workLogoClass[entry.slug]}
+          />
+        </div>
+
+        <!-- Headline -->
+        <div class="mb-10">
+          <p class="text-xs uppercase tracking-widest text-neutral-400 mb-2">{entry.category}</p>
+          <h2 class="text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight leading-tight">
+            {entry.company}
+          </h2>
+          <p class="text-sm text-neutral-500 mt-3">{entry.period} — {entry.location}</p>
+        </div>
+
+        <!-- Two-column content -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-neutral-100 pt-8">
+          <aside class="lg:col-span-3 flex flex-col gap-6">
+            {entry.details.map((d) => (
+              <div>
+                <p class="text-xs uppercase tracking-widest text-neutral-400 mb-1">{d.label}</p>
+                <p class="text-sm font-medium text-neutral-900">{d.value}</p>
+              </div>
+            ))}
+          </aside>
+          <div class="lg:col-span-9 flex flex-col gap-5">
+            {entry.longDescription.map((para) => (
+              <p class="text-base text-neutral-600 leading-relaxed">{para}</p>
+            ))}
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="rounded-2xl overflow-hidden">
+          <Image
+            src={workImgMap[entry.slug]}
+            alt={entry.company}
+            width={1400}
+            height={788}
+            loading="lazy"
+            decoding="async"
+            class="w-full object-cover aspect-video"
+          />
+        </div>
+
+      </div>
+    ))}
+
+    <!-- ── PROJECT PANELS ──────────────────────────────────── -->
+    {projects.map((project) => (
+      <div id={"panel-project-" + project.slug} class="detail-panel hidden px-8 lg:px-12 py-10 lg:py-14">
+
+        <!-- Headline -->
+        <div class="mb-10">
+          <p class="text-xs uppercase tracking-widest text-neutral-400 mb-2">
+            {project.category} — {project.year}
+          </p>
+          <h2 class="text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight leading-tight">
+            {project.title}
+          </h2>
+        </div>
+
+        <!-- Two-column content -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-neutral-100 pt-8">
+          <aside class="lg:col-span-3 flex flex-col gap-6">
+            {project.details.map((d) => (
+              <div>
+                <p class="text-xs uppercase tracking-widest text-neutral-400 mb-1">{d.label}</p>
+                <p class="text-sm font-medium text-neutral-900">{d.value}</p>
+              </div>
+            ))}
+          </aside>
+          <div class="lg:col-span-9 flex flex-col gap-5">
+            {project.longDescription.map((para) => (
+              <p class="text-base text-neutral-600 leading-relaxed">{para}</p>
+            ))}
+          </div>
+        </div>
+
+        <!-- Cover image -->
+        <div class="rounded-2xl overflow-hidden">
+          <Image
+            src={projectImgMap[project.slug]}
+            alt={project.title}
+            width={1400}
+            height={788}
+            loading="lazy"
+            decoding="async"
+            class="w-full object-cover aspect-video"
+          />
+        </div>
+
+      </div>
+    ))}
+
+  </div>
+</div>
+
+<script>
+  const backdrop = document.getElementById("detail-backdrop");
+  const modal    = document.getElementById("detail-modal");
+  const titleBar = document.getElementById("detail-modal-title");
+  const bodyEl   = document.getElementById("detail-body");
+  const closeBtn = document.getElementById("detail-close");
+
+  function openModal(panelId, label) {
+    if (!modal || !backdrop) return;
+    // Hide every panel, then reveal the target one
+    document.querySelectorAll(".detail-panel").forEach(function(p) {
+      p.classList.add("hidden");
+    });
+    const panel = document.getElementById("panel-" + panelId);
+    if (!panel) return;
+    panel.classList.remove("hidden");
+    if (titleBar) titleBar.textContent = label;
+    if (bodyEl)   bodyEl.scrollTop = 0;
+    backdrop.classList.add("is-open");
+    modal.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    if (!modal || !backdrop) return;
+    backdrop.classList.remove("is-open");
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
+
+  // Close via × button
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  // Close via backdrop click
+  if (backdrop) backdrop.addEventListener("click", closeModal);
+  // Close via Escape key
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // Open via any tile that carries [data-modal-open]
+  document.querySelectorAll("[data-modal-open]").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      e.preventDefault();
+      var panelId = el.getAttribute("data-modal-open");
+      var label   = el.getAttribute("data-modal-label") || "";
+      openModal(panelId, label);
+    });
+  });
+</script>

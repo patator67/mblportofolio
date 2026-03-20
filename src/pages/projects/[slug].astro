@@ -1,0 +1,116 @@
+---
+import { projects } from "@/data/projects";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { Image } from "astro:assets";
+import imgUav from "@/images/projects/uavproject.jpeg";
+import imgPrice from "@/images/projects/pricepredictionproject.jpg";
+import imgAvd from "@/images/projects/vehicledesignproject.jpeg";
+import imgPrint from "@/images/projects/3dprintingproject.jpg";
+import imgLutlab from "@/images/projects/lutlabproject.png";
+import imgDiy from "@/images/projects/diyproject.png";
+
+export async function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+const projectImages: Record<string, ImageMetadata> = {
+  "uav-coastal-surveillance": imgUav,
+  "ai-ticket-forecasting": imgPrice,
+  "avd-project": imgAvd,
+  "3d-printing": imgPrint,
+  "lutlab": imgLutlab,
+  "diy-projects": imgDiy,
+};
+const coverImage = projectImages[project.slug];
+---
+
+<BaseLayout>
+  <Wrapper variant="standard" class="pt-32 lg:pt-48 pb-20 lg:pb-32">
+    <!-- Back link -->
+    <a
+      href="/#projects"
+      class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-base-400 dark:text-base-500 hover:text-base-900 dark:hover:text-white transition-colors duration-150 mb-12 lg:mb-20"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 6H2M2 6L6 2M2 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      All Projects
+    </a>
+
+    <!-- Header grid -->
+    <div class="border-t border-base-900 dark:border-base-100 pt-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 lg:mb-24">
+      <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest">
+        {project.year}
+      </Text>
+      <Text
+        tag="h1"
+        variant="display3XL"
+        class="font-bold text-base-900 dark:text-white lg:col-span-2"
+      >
+        {project.title}
+      </Text>
+    </div>
+
+    <!-- Meta + description grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
+      <!-- Details sidebar -->
+      <aside class="lg:col-span-3">
+        <div class="flex flex-col gap-6">
+          {
+            project.details.map((detail) => (
+              <div>
+                <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-1">
+                  {detail.label}
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-900 dark:text-white font-medium">
+                  {detail.value}
+                </Text>
+              </div>
+            ))
+          }
+          <div>
+            <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-1">
+              Category
+            </Text>
+            <Text tag="p" variant="textSM" class="text-base-900 dark:text-white font-medium uppercase">
+              {project.category}
+            </Text>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Long description -->
+      <div class="lg:col-span-7 lg:col-start-5 flex flex-col gap-6">
+        {
+          project.longDescription.map((para) => (
+            <Text tag="p" variant="textBase" class="text-base-600 dark:text-base-300 leading-relaxed">
+              {para}
+            </Text>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Cover image -->
+    {coverImage && (
+      <div class="mt-20 lg:mt-32 w-full overflow-hidden rounded-2xl">
+        <Image
+          src={coverImage}
+          alt={project.title}
+          width={1400}
+          height={788}
+          loading="eager"
+          decoding="async"
+          class="w-full object-cover aspect-video"
+        />
+      </div>
+    )}
+  </Wrapper>
+</BaseLayout>

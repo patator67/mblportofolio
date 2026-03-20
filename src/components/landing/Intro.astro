@@ -1,20 +1,104 @@
 ---
-// Fundations
-import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 ---
 
-<section>
-  <Wrapper variant="standard" class="pb-8 pt-40 lg:pt-80">
-    <div class="grid grid-cols-1 lg:grid-cols-4 items-start gap-y-8">
-      <Text
-        tag="h1"
-        variant="displayLG"
-        class="font-semibold leading-snug text-left tracking-tighter lg:col-span-2 text-base-900 dark:text-white lg:col-start-3"
-      >
-        Creative technologist, Helsinki. Code. Design. Strategy. Digital
-        products with intent.
-      </Text>
+<section class="relative bg-black overflow-hidden">
+
+  <Wrapper variant="standard" class="relative z-10 pt-28 lg:pt-40 pb-24 lg:pb-36">
+
+    <!-- Tiny top row -->
+    <div class="stagger-fade flex items-center justify-between mb-12 lg:mb-16">
+      <span class="text-[9px] tracking-[0.35em] uppercase text-white/20">Marius Borsu Lefevre</span>
+      <span class="text-[9px] tracking-[0.35em] uppercase text-white/20">2026</span>
     </div>
+
+    <!-- ── Main composed block ─────────────────────────────── -->
+    <!-- Crosses live at this container's four corners         -->
+    <div class="stagger-fade relative grid grid-cols-1 lg:grid-cols-[5fr_7fr] grid-rows-[auto_auto] gap-3">
+
+      <!-- Corner crosses pinned to the block's own corners -->
+      <span class="block-cross" style="top:0;    left:0;"></span>
+      <span class="block-cross" style="top:0;    right:0;"></span>
+      <span class="block-cross" style="bottom:0; left:0;"></span>
+      <span class="block-cross" style="bottom:0; right:0;"></span>
+
+      <!-- ① Name — top-left -->
+      <div class="bg-[#111111] px-10 pt-12 pb-10 lg:px-14 lg:pt-16 lg:pb-12">
+        <h1 class="text-[clamp(3.4rem,6.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.88] text-white">
+          Marius<br />Borsu<br />Lefevre
+        </h1>
+      </div>
+
+      <!-- ② Bio — top-right -->
+      <div class="bg-[#111111] px-10 py-12 lg:px-14 lg:py-14">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25 mb-6">About</p>
+        <p class="text-[1.05rem] lg:text-[1.15rem] text-white/55 leading-[1.9] font-light tracking-[-0.005em]">
+          Aerospace engineer with a double degree from ISAE&#8209;Supaero and Imperial College London.
+          I build at the edge of deep tech, product design, and venture &mdash; from UAV systems and
+          AI models to startups and investment strategy. Always learning, always iterating.<span class="intro-cursor ml-px">&#9612;</span>
+        </p>
+      </div>
+
+      <!-- ③ Portfolio + arrow — bottom-left -->
+      <div class="bg-[#111111] px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14 flex flex-col justify-between gap-10">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25">Portfolio</p>
+        <!-- Down arrow -->
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white/20">
+          <path d="M14 4V24M14 24L5 15M14 24L23 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <!-- ④ Education — bottom-right -->
+      <div class="bg-[#111111] px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25 mb-8">Education</p>
+        <div class="flex flex-col gap-6">
+          <div>
+            <p class="text-sm font-semibold text-white/80 leading-snug">ISAE-Supaero</p>
+            <p class="text-xs text-white/35 mt-0.5 tracking-wide">MEng Aerospace Engineering &middot; 2022–2025</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white/80 leading-snug">Imperial College London</p>
+            <p class="text-xs text-white/35 mt-0.5 tracking-wide">MSc Innovation &amp; Technology Management &middot; 2025–2026</p>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-white/80 leading-snug">Bocconi University</p>
+            <p class="text-xs text-white/35 mt-0.5 tracking-wide">Exchange — Finance &amp; Strategy &middot; 2024</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </Wrapper>
 </section>
+
+<style>
+  .block-cross {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    z-index: 10;
+  }
+  .block-cross::before,
+  .block-cross::after {
+    content: '';
+    position: absolute;
+    background: #ffffff;
+    opacity: 0.35;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  .block-cross::before { width: 72px; height: 1px; }
+  .block-cross::after  { width: 1px;  height: 72px; }
+
+  @keyframes intro-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  .intro-cursor {
+    color: rgba(255, 255, 255, 0.25);
+    animation: intro-blink 1.1s step-start infinite;
+  }
+</style>

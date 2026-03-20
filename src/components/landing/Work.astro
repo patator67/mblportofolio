@@ -1,112 +1,119 @@
 ---
 // Assets
 import { Image } from "astro:assets";
-import one from "@/images/work/one.png";
-import two from "@/images/work/two.png";
-import three from "@/images/work/three.png";
+import imgStarburst from "@/images/work/starburstproject.jpeg";
+import imgAirbus from "@/images/work/airbusproject.jpg";
+import imgAco from "@/images/work/acoproject.jpg";
+import logoStarburst from "@/images/logos/starburst.png";
+import logoAirbus from "@/images/logos/airbus.png";
+import logoAco from "@/images/logos/aco.png";
+// Data
+import { workEntries } from "@/data/work";
 // Fundations
-import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-const featuredProjects = [
-  {
-    year: "2026",
-    title: "BRoom",
-    description:
-      "An electric vehicle platform built around modular hardware, real-time telemetry, and software-defined systems for efficiency, autonomy, and long-term scalability.",
-    category: "Electric Vehicle Platform",
-    image: one,
-    imageAlt:
-      "Electric car in motion against a minimal background, highlighting a digital cockpit and aerodynamic design.",
-  },
 
-  {
-    year: "2026",
-    title: "Aurora Ride",
-    description:
-      "An electric mobility subscription focused on real-time diagnostics, predictive maintenance, and low-friction commuter flows.",
-    category: "Product Systems",
-    image: two,
-    imageAlt:
-      "Modern electric bicycle positioned against a minimal, light-colored wall.",
-  },
-  {
-    year: "2026",
-    title: "Northwind",
-    description:
-      "An electric device platform built around efficient power management, embedded firmware, and production-ready industrial design for reliable, scalable deployment.",
-    category: "Hardware & Embedded Systems",
-    image: three,
-    imageAlt:
-      "Minimal electric device on a clean surface, showing precision controls, status indicators, and compact industrial design.",
-  },
-];
+const imageMap: Record<string, ImageMetadata> = {
+  starburst: imgStarburst,
+  "airbus-helicopters": imgAirbus,
+  "aco-le-mans": imgAco,
+};
+
+const logoMap: Record<string, ImageMetadata> = {
+  starburst: logoStarburst,
+  "airbus-helicopters": logoAirbus,
+  "aco-le-mans": logoAco,
+};
+
+const logoWidth: Record<string, number> = {
+  starburst: 560,
+  "airbus-helicopters": 560,
+  "aco-le-mans": 120,
+};
+
+const logoHeight: Record<string, number> = {
+  starburst: 104,
+  "airbus-helicopters": 104,
+  "aco-le-mans": 120,
+};
+
+const logoClass: Record<string, string> = {
+  starburst: "object-contain object-center brightness-0 invert h-10 w-auto max-w-[275px]",
+  "airbus-helicopters": "object-contain object-center brightness-0 invert h-8 w-auto max-w-[200px]",
+  "aco-le-mans": "object-contain object-center brightness-0 invert h-24 w-auto max-w-[96px]",
+};
 ---
 
-<section class="scroll-mt-32" id="work">
-  <Wrapper variant="standard" class="py-12 lg:py-24">
-    <div class="grid grid-cols-1 lg:grid-cols-4 items-start">
-      <div class="lg:col-start-2">
-        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-300"
-          >Featured Work
-          <br />
-          2026 - Now</Text
-        >
-      </div>
-      <Text
-        tag="h2"
-        variant="textXL"
-        class="font-semibold leading-snug text-left tracking-tighter lg:col-span-2 text-base-900 dark:text-white"
-      >
-        Work
-      </Text>
-    </div>
+<section class="scroll-mt-20" id="work">
+  <!-- Apple-style section header -->
+  <Wrapper variant="standard" class="pt-24 pb-6">
+    <p class="text-xs tracking-widest uppercase text-base-400 dark:text-base-500 mb-3">Experience</p>
+    <h2 class="text-[clamp(2.5rem,7vw,5.5rem)] font-bold tracking-tighter text-base-900 dark:text-white leading-none">
+      Work.
+    </h2>
+  </Wrapper>
 
-    <div class="flex flex-col lg:gap-12 mt-8">
-      {
-        featuredProjects.map((project) => (
-          <article class="py-12 border-t border-base-200 dark:border-base-800">
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-start">
-              <Text
-                tag="p"
-                variant="textXS"
-                class="text-base-600 dark:text-base-300 uppercase"
-              >
-                {project.year}
-              </Text>
-              <Text
-                tag="h3"
-                variant="displaySM"
-                class="text-base-900 dark:text-white leading-tight font-semibold "
-              >
-                {project.title}
-              </Text>
-              <Text
-                tag="p"
-                variant="textSM"
-                class="text-base-600 dark:text-base-300"
-              >
-                {project.description}
-              </Text>
-              <Text
-                tag="p"
-                variant="textXS"
-                class="text-base-600 dark:text-base-300 uppercase lg:ml-auto lg:col-start-4"
-              >
-                {project.category}
-              </Text>
-            </div>
-            <Image
-              width={1420}
-              height={930}
-              src={project.image}
-              alt={project.imageAlt}
-              loading="lazy"
-              decoding="async"
-              class="size-full aspect-4/2 rounded-4xl mt-12 object-cover object-center"
-            />
-          </article>
-        ))
-      }
-    </div>
+  <!-- Responsive tile grid: 1 col → 3 col -->
+  <Wrapper variant="standard" class="grid grid-cols-1 lg:grid-cols-3 gap-3 pb-24">
+    {workEntries.map((entry) => (
+      <a
+        href={"/work/" + entry.slug}
+        data-modal-open={"work-" + entry.slug}
+        data-modal-label={entry.company}
+        class="apple-tile stagger-fade flex flex-col group"
+        style="min-height:500px"
+      >
+        <div class="p-8 flex flex-col flex-1">
+          <!-- Logo area: fixed height so text always starts at same level -->
+          <div class="flex justify-center items-center h-24 w-full mb-6">
+            <span
+              onclick="event.preventDefault(); event.stopPropagation(); window.open(this.dataset.href, '_blank', 'noopener,noreferrer')"
+              data-href={entry.website}
+              role="link"
+              tabindex="0"
+              class="tile-logo flex justify-center items-center cursor-pointer"
+            >
+              <Image
+                src={logoMap[entry.slug]}
+                alt={entry.company + " logo"}
+                width={logoWidth[entry.slug]}
+                height={logoHeight[entry.slug]}
+                class={logoClass[entry.slug]}
+              />
+            </span>
+          </div>
+          <!-- Category -->
+          <p class="text-xs tracking-widest uppercase font-semibold text-neutral-500 mb-2">{entry.category}</p>
+          <!-- Description -->
+          <p class="text-base text-neutral-300 leading-relaxed flex-1">{entry.description}</p>
+          <!-- Period + expand indicator -->
+          <div class="flex items-center justify-between mt-6">
+            <p class="text-xs text-neutral-600">{entry.period}</p>
+            <span
+              class="w-8 h-8 rounded-full border border-neutral-700 group-hover:border-neutral-400
+                     flex items-center justify-center
+                     text-neutral-600 group-hover:text-neutral-200
+                     transition-all duration-300"
+              aria-hidden="true"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 1V11M1 6H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <!-- Cover image -->
+        <div class="apple-tile-inner mx-4 mb-4">
+          <Image
+            src={imageMap[entry.slug]}
+            alt={entry.company + " — " + entry.location}
+            width={800}
+            height={450}
+            loading="lazy"
+            decoding="async"
+            class="w-full object-cover aspect-video"
+          />
+        </div>
+      </a>
+    ))}
   </Wrapper>
 </section>

@@ -26,21 +26,23 @@ export interface Props {
 }
 // Define text styles for each variant
 const textStyles: Record<string, string> = {
-  display6XL: "text-4xl  sm:text-7xl md:text-9xl lg:text-[12rem]",
-  display5XL: "text-4xl  sm:text-7xl md:text-8xl lg:text-[10rem]",
-  display4XL: "text-4xl  sm:text-7xl md:text-8xl lg:text-9xl",
-  display3XL: "text-5xl  sm:text-6xl md:text-7xl lg:text-8xl",
-  display2XL: "text-5xl  sm:text-5xl md:text-6xl lg:text-7xl",
-  displayXL: "text-4xl  sm:text-4xl md:text-5xl lg:text-6xl",
-  displayLG: "text-3xl  sm:text-3xl md:text-4xl lg:text-5xl",
-  displayMD: "text-2xl  sm:text-2xl md:text-3xl lg:text-4xl",
-  displaySM: "text-2xl  sm:text-3xl md:text-3xl lg:text-3xl",
-  displayXS: "text-base  sm:text-lg md:text-xl lg:text-2xl",
-  textXL: "text-lg sm:text-xl md:text-2xl",
-  textLG: "text-base sm:text-lg md:text-xl ",
-  textBase: "text-base",
-  textSM: "text-sm ",
-  textXS: "text-xs ",
+  /* Swiss display scale — tight tracking, bold weight expected from caller */
+  display6XL: "text-[clamp(4rem,14vw,14rem)] leading-[0.9] tracking-tight",
+  display5XL: "text-[clamp(3.5rem,11vw,11rem)] leading-[0.9] tracking-tight",
+  display4XL: "text-[clamp(3rem,9vw,9rem)]   leading-[0.9] tracking-tight",
+  display3XL: "text-[clamp(2.5rem,7vw,7rem)]  leading-[0.9] tracking-tight",
+  display2XL: "text-[clamp(2rem,5.5vw,5.5rem)] leading-[0.95] tracking-tight",
+  displayXL:  "text-[clamp(1.75rem,4.5vw,4.5rem)] leading-none tracking-tight",
+  displayLG:  "text-[clamp(1.5rem,3.5vw,3.5rem)] leading-none tracking-tight",
+  displayMD:  "text-[clamp(1.25rem,2.5vw,2.5rem)] leading-tight tracking-tight",
+  displaySM:  "text-[clamp(1.125rem,2vw,2rem)]  leading-tight tracking-tight",
+  displayXS:  "text-[clamp(1rem,1.5vw,1.5rem)]  leading-tight",
+  /* Body scale */
+  textXL:   "text-xl leading-relaxed",
+  textLG:   "text-lg leading-relaxed",
+  textBase: "text-base leading-relaxed",
+  textSM:   "text-sm leading-relaxed",
+  textXS:   "text-xs leading-normal",
 };
 // Destructure props with default values
 const {

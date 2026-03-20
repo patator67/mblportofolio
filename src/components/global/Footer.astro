@@ -6,28 +6,25 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const links = [
-  { href: "#_", text: "LinkedIn" },
-  { href: "#_", text: "Arena" },
+  { href: "https://linkedin.com/in/mborsulefevre", text: "LinkedIn" },
+  { href: "mailto:mariusborsu@hotmail.fr", text: "Email" },
   { href: "#_", text: "GitHub" },
 ];
 const year = new Date().getFullYear();
 ---
 
-<footer>
-  <Wrapper variant="standard" class="py-2">
-    <div class="grid grid-cols-2 lg:grid-cols-4 items-start">
-      <div
-        class="flex items-center gap-2 text-base-600 dark:text-base-300 text-xs tracking-tight"
-      >
-        {year}
-        <Logo />
+<footer class="border-t border-base-200 dark:border-base-800 mt-auto">
+  <Wrapper variant="standard" class="py-4">
+    <div class="grid grid-cols-2 lg:grid-cols-4 items-center">
+      <div class="flex items-center gap-2 text-base-500 dark:text-base-400 text-xs tracking-tight uppercase">
+        © {year} <Logo class="text-base-900 dark:text-white" />
       </div>
-      <div class="flex flex-wrap gap-8 text-sm items-center">
+      <div class="flex flex-wrap gap-8 items-center">
         {
           links.map((link) => (
             <a
               href={link.href}
-              class="text-base-600 tracking-tight  text-xs hover:text-base-900 dark:text-white transition-colors"
+              class="text-base-500 dark:text-base-400 text-xs tracking-tight uppercase hover:text-base-900 dark:hover:text-white transition-colors duration-150"
             >
               {link.text}
             </a>

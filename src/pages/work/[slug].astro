@@ -1,0 +1,147 @@
+---
+import { workEntries } from "@/data/work";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { Image } from "astro:assets";
+import imgStarburst from "@/images/work/starburstproject.jpeg";
+import imgAirbus from "@/images/work/airbusproject.jpg";
+import imgAco from "@/images/work/acoproject.jpg";
+import logoStarburst from "@/images/logos/starburst.png";
+import logoAirbus from "@/images/logos/airbus.png";
+import logoAco from "@/images/logos/aco.png";
+
+export async function getStaticPaths() {
+  return workEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+
+const images: Record<string, ImageMetadata> = {
+  starburst: imgStarburst,
+  "airbus-helicopters": imgAirbus,
+  "aco-le-mans": imgAco,
+};
+
+const logos: Record<string, ImageMetadata> = {
+  starburst: logoStarburst,
+  "airbus-helicopters": logoAirbus,
+  "aco-le-mans": logoAco,
+};
+
+const logoClass: Record<string, string> = {
+  starburst: "h-7 w-auto max-w-[180px]",
+  "airbus-helicopters": "h-7 w-auto max-w-[160px]",
+  "aco-le-mans": "h-10 w-auto max-w-[40px]",
+};
+
+const coverImage = images[entry.slug];
+const logo = logos[entry.slug];
+const isSquareLogo = entry.slug === "aco-le-mans";
+const logoWidth = isSquareLogo ? 80 : 360;
+const logoHeight = isSquareLogo ? 80 : 72;
+const logoSizeClass = isSquareLogo
+  ? "h-10 w-auto max-w-[40px]"
+  : entry.slug === "airbus-helicopters"
+    ? "h-7 w-auto max-w-[160px]"
+    : "h-7 w-auto max-w-[180px]";
+const logoFullClass = `object-contain brightness-0 invert-0 dark:invert ${logoSizeClass}`;
+---
+
+<BaseLayout>
+  <Wrapper variant="standard" class="pt-32 lg:pt-48 pb-20 lg:pb-32">
+    <!-- Back link -->
+    <a
+      href="/#work"
+      class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-base-400 dark:text-base-500 hover:text-base-900 dark:hover:text-white transition-colors duration-150 mb-12 lg:mb-20"
+    >
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 6H2M2 6L6 2M2 6L6 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      All Work
+    </a>
+
+    <!-- Header grid -->
+    <div class="border-t border-base-900 dark:border-base-100 pt-6 grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16 lg:mb-24">
+      <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest">
+        {entry.period}
+      </Text>
+      <div class="lg:col-span-2 flex flex-col gap-4">
+        {logo && (
+          <Image
+            src={logo}
+            alt={entry.company + " logo"}
+            width={logoWidth}
+            height={logoHeight}
+            class={logoFullClass}
+          />
+        )}
+        <Text
+          tag="h1"
+          variant="display3XL"
+          class="font-bold text-base-900 dark:text-white"
+        >
+          {entry.company}
+        </Text>
+      </div>
+    </div>
+
+    <!-- Meta + description grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
+      <!-- Details sidebar -->
+      <aside class="lg:col-span-3">
+        <div class="flex flex-col gap-6">
+          {
+            entry.details.map((detail) => (
+              <div>
+                <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-1">
+                  {detail.label}
+                </Text>
+                <Text tag="p" variant="textSM" class="text-base-900 dark:text-white font-medium">
+                  {detail.value}
+                </Text>
+              </div>
+            ))
+          }
+          <div>
+            <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-1">
+              Category
+            </Text>
+            <Text tag="p" variant="textSM" class="text-base-900 dark:text-white font-medium uppercase">
+              {entry.category}
+            </Text>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Long description -->
+      <div class="lg:col-span-7 lg:col-start-5 flex flex-col gap-6">
+        {
+          entry.longDescription.map((para) => (
+            <Text tag="p" variant="textBase" class="text-base-600 dark:text-base-300 leading-relaxed">
+              {para}
+            </Text>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Cover image -->
+    {coverImage && (
+      <div class="mt-20 lg:mt-32 w-full">
+        <Image
+          width={1420}
+          height={710}
+          src={coverImage}
+          alt={`${entry.company} — ${entry.location}`}
+          loading="lazy"
+          decoding="async"
+          class="w-full object-cover aspect-video rounded-2xl"
+        />
+      </div>
+    )}
+  </Wrapper>
+</BaseLayout>

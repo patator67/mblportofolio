@@ -1,0 +1,64 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import * as packageJson from "../../../package.json";
+
+type PackageDeps = Record<string, string | undefined>;
+
+const dependencies = (packageJson.dependencies ?? {}) as PackageDeps;
+const devDependencies = (packageJson.devDependencies ?? {}) as PackageDeps;
+
+const getVersion = (name: string) => dependencies[name] ?? devDependencies[name];
+const cleanVersion = (raw: string | undefined) =>
+  raw ? raw.replace(/^[~^<>=\s]*/, "") : "unknown";
+
+const astroVersion = cleanVersion(getVersion("astro"));
+const tailwindVersion = cleanVersion(getVersion("tailwindcss"));
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="pb-8 pt-24">
+      <Text
+        tag="h1"
+        variant="textSM"
+        class="font-medium text-base-900 dark:text-white"
+      >
+        Details
+      </Text>
+
+      <div class="mt-8 border-t border-base-200 dark:border-base-800">
+        <div
+          class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-800"
+        >
+          <Text
+            tag="h3"
+            variant="textSM"
+            class="font-medium text-base-900 dark:text-white"
+          >
+            Astro
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 lg:col-span-2">
+            {astroVersion}
+          </Text>
+        </div>
+
+        <div
+          class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-800"
+        >
+          <Text
+            tag="h3"
+            variant="textSM"
+            class="font-medium text-base-900 dark:text-white"
+          >
+            Tailwind CSS
+          </Text>
+          <Text tag="p" variant="textSM" class="text-base-600 lg:col-span-2">
+            {tailwindVersion}
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,126 +1,224 @@
 ---
 // Foundations
+import { Image } from "astro:assets";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Logos
+import logoBocconi from "@/images/logos/bocconi.png";
+import logoImperial from "@/images/logos/imperial.png";
+import logoSupaero from "@/images/logos/supaero.png";
+
+// key → logo image
+const logoMap: Record<string, ImageMetadata> = {
+  bocconi: logoBocconi,
+  imperial: logoImperial,
+  supaero: logoSupaero,
+};
+
+// Bocconi 1903×398 (4.78:1) | Imperial 12900×1417 (9.1:1) | SUPAERO 1821×1102 (1.65:1)
+// Base sizes × scale: Bocconi h-10×0.9=h-9, Imperial h-8×0.95≈h-8(kept), SUPAERO h-12×1.2=h-14
+const logoWidth: Record<string, number> = { bocconi: 344, imperial: 519, supaero: 262 };
+const logoHeight: Record<string, number> = { bocconi: 72, imperial: 57, supaero: 158 };
+const logoClass: Record<string, string> = {
+  bocconi:  "object-contain object-left brightness-0 invert-0 dark:invert h-9 w-auto max-w-[172px]",
+  imperial: "object-contain object-left brightness-0 invert-0 dark:invert h-[30px] w-auto max-w-[210px]",
+  supaero:  "object-contain object-left brightness-0 invert-0 dark:invert h-14 w-auto max-w-[96px]",
+};
 
 const education = [
   {
-    period: "Ongoing",
-    title: "Self-Directed Study",
-    description:
-      "Independent, long-form study driven by primary sources, reverse engineering, and applied experimentation rather than course completion.",
-    category: "Autodidactic",
+    key: "bocconi",
+    website: "https://www.unibocconi.eu",
+    period: "2024 – 2026",
+    title: "Bocconi University",
+    location: "Milan, Italy",
+    degree: "MSc Innovation & Technology",
+    courses: [
+      "Venture Capital & Valuation",
+      "Private Equity",
+      "M&A",
+      "Data Analytics (R, Python)",
+      "Applied Machine Learning",
+      "Project Management",
+      "Intellectual Property Law",
+      "Investments and Portfolio Decisions",
+    ],
+    projects: [
+      {
+        title: "PE Investment Fund Simulation",
+        description:
+          "Simulated a full investment fund: due diligence, DCF and multiples valuation, and investment committee analyses across live deals.",
+      },
+      {
+        title: "IP Value Regression Model",
+        description:
+          "Built regression models in R/Python to assess patent IP value based on citation count, family size, and technology field.",
+      },
+    ],
   },
   {
-    period: "Advanced Focus",
-    title: "Design & Visual Systems",
-    description:
-      "Training in typography, layout, proportion, and hierarchy with emphasis on constraint-based decision-making and visual clarity under pressure.",
-    category: "Design Education",
+    key: "imperial",
+    website: "https://www.imperial.ac.uk",
+    period: "2019 – 2024",
+    title: "Imperial College London",
+    location: "London, United Kingdom",
+    degree: "MEng Aeronautical Engineering",
+    courses: [
+      "Systems Engineering",
+      "Control Systems",
+      "Advanced Manufacturing",
+      "Machine Learning for Aerospace",
+      "Entrepreneurship",
+      "Aerodynamics",
+      "Flight Mechanics",
+      "Structural Analysis",
+    ],
+    projects: [
+      {
+        title: "UAV Coastal Surveillance (Group Design Project)",
+        description:
+          "Led subsystem integration and team coordination for a UAV platform for autonomous coastal surveillance.",
+      },
+      {
+        title: "Composite Manufacturing Thesis",
+        description:
+          "Analyzed trade-offs in composite manufacturing for mechanical performance optimization.",
+      },
+    ],
   },
   {
-    period: "Foundational",
-    title: "Frontend Engineering",
-    description:
-      "Practical study of modern frontend systems including component architectures, state management, performance constraints, and accessibility.",
-    category: "Software Engineering",
-  },
-  {
-    period: "Applied Theory",
-    title: "Systems Thinking",
-    description:
-      "Study of complex systems, feedback loops, second-order effects, and failure modes across technical and organizational domains.",
-    category: "Systems Theory",
-  },
-  {
-    period: "Continuous Practice",
-    title: "Typography & Reading Discipline",
-    description:
-      "Ongoing typographic analysis through reproduction, teardown of historical work, and high-frequency iteration to sharpen visual judgment.",
-    category: "Visual Literacy",
-  },
-  {
-    period: "Cross-Disciplinary",
-    title: "Product & Decision Making",
-    description:
-      "Study of trade-offs, prioritization, and decision frameworks informed by real-world constraints rather than idealized process models.",
-    category: "Product Thinking",
-  },
-  {
-    period: "Technical Literacy",
-    title: "Computational Foundations",
-    description:
-      "Understanding of algorithms, data structures, and computational limits sufficient to reason about performance, scale, and system behavior.",
-    category: "Computer Science",
-  },
-  {
-    period: "Ongoing",
-    title: "Critical Reading & Writing",
-    description:
-      "Structured reading and synthesis across design, technology, philosophy, and economics to build durable mental models and language precision.",
-    category: "Intellectual Formation",
+    key: "supaero",
+    website: "https://www.isae-supaero.fr",
+    period: "2022 – 2023",
+    title: "ISAE-SUPAERO",
+    location: "Toulouse, France",
+    degree: "Engineering Exchange Program",
+    courses: [
+      "Flight Testing",
+      "Flight Dynamics",
+      "Project Management",
+      "Systems Engineering",
+      "Business Strategy",
+      "Mechanics of Flight",
+      "Orbital Mechanics",
+      "Applied Mathematics",
+    ],
+    projects: [
+      {
+        title: "AI Ticket Price Forecasting",
+        description:
+          "ML pipeline using web-scraped fare data to predict optimal airline booking windows for specific routes.",
+      },
+    ],
   },
 ];
 ---
 
-<section class="scroll-mt-32" id="education">
-  <Wrapper variant="standard" class="py-12 lg:py-24">
-    <div class="grid grid-cols-1 lg:grid-cols-4 items-start">
-      <div class="lg:col-start-2">
-        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-300">
-          Education & Formation
-          <br />
-          Ongoing
-        </Text>
-      </div>
-
-      <Text
-        tag="h2"
-        variant="textXL"
-        class="font-semibold leading-snug tracking-tighter lg:col-span-2 text-base-900 dark:text-white"
-      >
+<section class="scroll-mt-20" id="education">
+  <Wrapper variant="standard" class="py-20 lg:py-32">
+    <div class="flex items-baseline justify-between mb-2">
+      <Text tag="h2" variant="displayMD" class="font-bold text-base-900 dark:text-white uppercase tracking-tight">
         Education
       </Text>
+      <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest">
+        Formation — Ongoing
+      </Text>
     </div>
+    <div class="h-px bg-base-900 dark:bg-base-100 mb-0"></div>
 
-    <div class="flex flex-col gap-12 mt-12">
+    <div class="flex flex-col">
       {
         education.map((item) => (
-          <article class="py-12 border-t border-base-200 dark:border-base-800">
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 items-start">
+          <div class="hover-row border-b border-base-200 dark:border-base-800 -mx-6 lg:-mx-12 px-6 lg:px-12">
+            <!-- Always-visible header row -->
+            <div class="py-8 lg:py-10 grid grid-cols-1 gap-3 lg:grid-cols-12 items-center">
               <Text
                 tag="p"
                 variant="textXS"
-                class="text-base-600 dark:text-base-300 uppercase"
+                class="text-base-400 dark:text-base-500 uppercase tracking-widest lg:col-span-2"
               >
                 {item.period}
               </Text>
 
-              <Text
-                tag="h3"
-                variant="textLG"
-                class="text-base-900 dark:text-white leading-tight font-semibold"
-              >
-                {item.title}
-              </Text>
+              <div class="lg:col-span-3">
+                <a
+                  href={item.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onclick="event.stopPropagation()"
+                  class="inline-flex items-center opacity-80 hover:opacity-100 transition-opacity duration-150 mb-2"
+                >
+                  <Image
+                    src={logoMap[item.key]}
+                    alt={item.title + " logo"}
+                    width={logoWidth[item.key]}
+                    height={logoHeight[item.key]}
+                    class={logoClass[item.key]}
+                  />
+                </a>
+                <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 mt-0.5">
+                  {item.location}
+                </Text>
+              </div>
 
               <Text
                 tag="p"
                 variant="textSM"
-                class="text-base-600 dark:text-base-300"
+                class="text-base-500 dark:text-base-400 lg:col-span-5 lg:col-start-6"
               >
-                {item.description}
+                {item.degree}
               </Text>
 
-              <Text
-                tag="p"
-                variant="textXS"
-                class="text-base-600 dark:text-base-300 uppercase lg:ml-auto lg:col-start-4"
-              >
-                {item.category}
-              </Text>
+              <div class="hidden lg:flex lg:col-span-2 lg:col-start-11 lg:justify-end items-center gap-1">
+                <Text tag="p" variant="textXS" class="text-base-300 dark:text-base-600 uppercase tracking-widest">
+                  Hover
+                </Text>
+                <svg class="size-3 text-base-300 dark:text-base-600 transition-transform duration-300 ease-spring group-hover:rotate-90" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </div>
-          </article>
+
+            <!-- Hover-revealed expanded content -->
+            <div class="reveal-panel">
+              <div class="reveal-inner">
+                <div class="reveal-content pb-10 lg:pb-14 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  <div class="lg:col-span-5 lg:col-start-3">
+                    <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-4">
+                      Courses
+                    </Text>
+                    <ul class="flex flex-col gap-1.5">
+                      {item.courses.map((course) => (
+                        <li>
+                          <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-300">
+                            {course}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="lg:col-span-4 lg:col-start-9">
+                    <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest mb-4">
+                      Projects
+                    </Text>
+                    <div class="flex flex-col gap-5">
+                      {item.projects.map((project) => (
+                        <div>
+                          <Text tag="p" variant="textSM" class="text-base-900 dark:text-white font-semibold mb-1">
+                            {project.title}
+                          </Text>
+                          <Text tag="p" variant="textSM" class="text-base-500 dark:text-base-400">
+                            {project.description}
+                          </Text>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         ))
       }
     </div>
