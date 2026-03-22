@@ -3,6 +3,8 @@
 import { Image } from "astro:assets";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+import { educationEntries } from "@/data/education";
 // Logos
 import logoBocconi from "@/images/logos/bocconi.png";
 import logoImperial from "@/images/logos/imperial.png";
@@ -24,94 +26,6 @@ const logoClass: Record<string, string> = {
   imperial: "object-contain object-left brightness-0 invert-0 dark:invert h-[30px] w-auto max-w-[210px]",
   supaero:  "object-contain object-left brightness-0 invert-0 dark:invert h-14 w-auto max-w-[96px]",
 };
-
-const education = [
-  {
-    key: "bocconi",
-    website: "https://www.unibocconi.eu",
-    period: "2024 – 2026",
-    title: "Bocconi University",
-    location: "Milan, Italy",
-    degree: "MSc Innovation & Technology",
-    courses: [
-      "Venture Capital & Valuation",
-      "Private Equity",
-      "M&A",
-      "Data Analytics (R, Python)",
-      "Applied Machine Learning",
-      "Project Management",
-      "Intellectual Property Law",
-      "Investments and Portfolio Decisions",
-    ],
-    projects: [
-      {
-        title: "PE Investment Fund Simulation",
-        description:
-          "Simulated a full investment fund: due diligence, DCF and multiples valuation, and investment committee analyses across live deals.",
-      },
-      {
-        title: "IP Value Regression Model",
-        description:
-          "Built regression models in R/Python to assess patent IP value based on citation count, family size, and technology field.",
-      },
-    ],
-  },
-  {
-    key: "imperial",
-    website: "https://www.imperial.ac.uk",
-    period: "2019 – 2024",
-    title: "Imperial College London",
-    location: "London, United Kingdom",
-    degree: "MEng Aeronautical Engineering",
-    courses: [
-      "Systems Engineering",
-      "Control Systems",
-      "Advanced Manufacturing",
-      "Machine Learning for Aerospace",
-      "Entrepreneurship",
-      "Aerodynamics",
-      "Flight Mechanics",
-      "Structural Analysis",
-    ],
-    projects: [
-      {
-        title: "UAV Coastal Surveillance (Group Design Project)",
-        description:
-          "Led subsystem integration and team coordination for a UAV platform for autonomous coastal surveillance.",
-      },
-      {
-        title: "Composite Manufacturing Thesis",
-        description:
-          "Analyzed trade-offs in composite manufacturing for mechanical performance optimization.",
-      },
-    ],
-  },
-  {
-    key: "supaero",
-    website: "https://www.isae-supaero.fr",
-    period: "2022 – 2023",
-    title: "ISAE-SUPAERO",
-    location: "Toulouse, France",
-    degree: "Engineering Exchange Program",
-    courses: [
-      "Flight Testing",
-      "Flight Dynamics",
-      "Project Management",
-      "Systems Engineering",
-      "Business Strategy",
-      "Mechanics of Flight",
-      "Orbital Mechanics",
-      "Applied Mathematics",
-    ],
-    projects: [
-      {
-        title: "AI Ticket Price Forecasting",
-        description:
-          "ML pipeline using web-scraped fare data to predict optimal airline booking windows for specific routes.",
-      },
-    ],
-  },
-];
 ---
 
 <section class="scroll-mt-20" id="education">
@@ -124,7 +38,7 @@ const education = [
 
     <div class="flex flex-col">
       {
-        education.map((item) => (
+        educationEntries.map((item) => (
           <div class="hover-row border-b border-base-200 dark:border-base-800 -mx-6 lg:-mx-12 px-6 lg:px-12">
             <!-- Always-visible header row -->
             <div class="py-8 lg:py-10 grid grid-cols-1 gap-3 lg:grid-cols-12 items-center">
