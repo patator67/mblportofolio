@@ -1,0 +1,33 @@
+---
+// Reusable corner crosses for section headers
+---
+
+<div class="relative">
+  <!-- Corner crosses pinned to the container's own corners -->
+  <span class="block-cross" style="top:0;    left:0;"></span>
+  <span class="block-cross" style="top:0;    right:0;"></span>
+  <span class="block-cross" style="bottom:0; left:0;"></span>
+  <span class="block-cross" style="bottom:0; right:0;"></span>
+</div>
+
+<style>
+  .block-cross {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    z-index: 10;
+  }
+  .block-cross::before,
+  .block-cross::after {
+    content: '';
+    position: absolute;
+    background: #ffffff;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  .block-cross::before { width: 48px; height: 1px; }
+  .block-cross::after  { width: 1px;  height: 48px; }
+</style>

@@ -39,11 +39,11 @@ const workLogoW: Record<string, number> = {
 const workLogoH: Record<string, number> = {
   starburst: 104, "airbus-helicopters": 104, "aco-le-mans": 120,
 };
-// Modal background is white → logos must be dark (brightness-0 = black, no invert)
+// Modal background is dark → logos must be light (brightness-0 invert for white)
 const workLogoClass: Record<string, string> = {
-  starburst:            "h-10 w-auto max-w-[240px] object-contain brightness-0",
-  "airbus-helicopters": "h-8  w-auto max-w-[180px] object-contain brightness-0",
-  "aco-le-mans":        "h-14 w-auto max-w-[56px]  object-contain brightness-0",
+  starburst:            "h-10 w-auto max-w-[240px] object-contain brightness-0 invert",
+  "airbus-helicopters": "h-8  w-auto max-w-[180px] object-contain brightness-0 invert",
+  "aco-le-mans":        "h-14 w-auto max-w-[56px]  object-contain brightness-0 invert",
 };
 
 const projectImgMap: Record<string, ImageMetadata> = {
@@ -71,20 +71,20 @@ const projectImgMap: Record<string, ImageMetadata> = {
   class="fixed
     top-3 bottom-3 left-3 right-3
     lg:top-[4vh] lg:bottom-[4vh] lg:left-[10vw] lg:right-[10vw]
-    bg-white rounded-[28px] z-[61] flex flex-col shadow-2xl"
+    bg-base-800 dark:bg-base-800 rounded-[28px] z-[61] flex flex-col shadow-2xl"
 >
   <!-- Sticky header bar -->
-  <div class="shrink-0 flex items-center justify-between px-8 lg:px-12 py-5 border-b border-neutral-100">
+  <div class="shrink-0 flex items-center justify-between px-8 lg:px-12 py-5 border-b border-base-700">
     <span
       id="detail-modal-title"
-      class="text-xs uppercase tracking-widest text-neutral-400 font-medium"
+      class="text-xs uppercase tracking-widest text-base-500 dark:text-base-500 font-medium"
     ></span>
     <button
       id="detail-close"
       aria-label="Close"
-      class="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200
+      class="w-9 h-9 rounded-full bg-base-700 dark:bg-base-700 hover:bg-base-600 dark:hover:bg-base-600
              flex items-center justify-center
-             transition-colors duration-150 cursor-pointer text-neutral-500 hover:text-neutral-800"
+             transition-colors duration-150 cursor-pointer text-base-400 dark:text-base-400 hover:text-base-100 dark:hover:text-base-100"
     >
       <!-- × icon -->
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,7 +101,7 @@ const projectImgMap: Record<string, ImageMetadata> = {
       <div id={"panel-work-" + entry.slug} class="detail-panel hidden px-8 lg:px-12 py-10 lg:py-14">
 
         <!-- Company logo -->
-        <div class="mb-8 pb-8 border-b border-neutral-100">
+        <div class="mb-8 pb-8 border-b border-base-700">
           <Image
             src={workLogoMap[entry.slug]}
             alt={entry.company + " logo"}
@@ -113,26 +113,26 @@ const projectImgMap: Record<string, ImageMetadata> = {
 
         <!-- Headline -->
         <div class="mb-10">
-          <p class="text-xs uppercase tracking-widest text-neutral-400 mb-2">{entry.category}</p>
-          <h2 class="text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight leading-tight">
+          <p class="text-xs uppercase tracking-widest text-base-500 dark:text-base-500 mb-2">{entry.category}</p>
+          <h2 class="text-4xl lg:text-5xl font-bold text-white dark:text-white tracking-tight leading-tight">
             {entry.company}
           </h2>
-          <p class="text-sm text-neutral-500 mt-3">{entry.period} — {entry.location}</p>
+          <p class="text-sm text-base-400 dark:text-base-400 mt-3">{entry.period} — {entry.location}</p>
         </div>
 
         <!-- Two-column content -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-neutral-100 pt-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-base-700 pt-8">
           <aside class="lg:col-span-3 flex flex-col gap-6">
             {entry.details.map((d) => (
               <div>
-                <p class="text-xs uppercase tracking-widest text-neutral-400 mb-1">{d.label}</p>
-                <p class="text-sm font-medium text-neutral-900">{d.value}</p>
+                <p class="text-xs uppercase tracking-widest text-base-500 dark:text-base-500 mb-1">{d.label}</p>
+                <p class="text-sm font-medium text-white dark:text-white">{d.value}</p>
               </div>
             ))}
           </aside>
           <div class="lg:col-span-9 flex flex-col gap-5">
             {entry.longDescription.map((para) => (
-              <p class="text-base text-neutral-600 leading-relaxed">{para}</p>
+              <p class="text-base text-base-300 dark:text-base-300 leading-relaxed">{para}</p>
             ))}
           </div>
         </div>
@@ -159,27 +159,27 @@ const projectImgMap: Record<string, ImageMetadata> = {
 
         <!-- Headline -->
         <div class="mb-10">
-          <p class="text-xs uppercase tracking-widest text-neutral-400 mb-2">
+          <p class="text-xs uppercase tracking-widest text-base-500 dark:text-base-500 mb-2">
             {project.category} — {project.year}
           </p>
-          <h2 class="text-4xl lg:text-5xl font-bold text-neutral-900 tracking-tight leading-tight">
+          <h2 class="text-4xl lg:text-5xl font-bold text-white dark:text-white tracking-tight leading-tight">
             {project.title}
           </h2>
         </div>
 
         <!-- Two-column content -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-neutral-100 pt-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14 border-t border-base-700 pt-8">
           <aside class="lg:col-span-3 flex flex-col gap-6">
             {project.details.map((d) => (
               <div>
-                <p class="text-xs uppercase tracking-widest text-neutral-400 mb-1">{d.label}</p>
-                <p class="text-sm font-medium text-neutral-900">{d.value}</p>
+                <p class="text-xs uppercase tracking-widest text-base-500 dark:text-base-500 mb-1">{d.label}</p>
+                <p class="text-sm font-medium text-white dark:text-white">{d.value}</p>
               </div>
             ))}
           </aside>
           <div class="lg:col-span-9 flex flex-col gap-5">
             {project.longDescription.map((para) => (
-              <p class="text-base text-neutral-600 leading-relaxed">{para}</p>
+              <p class="text-base text-base-300 dark:text-base-300 leading-relaxed">{para}</p>
             ))}
           </div>
         </div>
