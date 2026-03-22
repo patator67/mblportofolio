@@ -2,7 +2,7 @@
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 ---
 
-<section class="relative bg-black overflow-hidden">
+<section class="relative bg-white dark:bg-base-950 overflow-hidden">
 
   <Wrapper variant="standard" class="relative z-10 pt-28 lg:pt-40 pb-24 lg:pb-36">
 
@@ -23,16 +23,16 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
       <span class="block-cross" style="bottom:0; right:0;"></span>
 
       <!-- ① Name — top-left -->
-      <div class="bg-[#111111] px-10 pt-12 pb-10 lg:px-14 lg:pt-16 lg:pb-12">
-        <h1 class="text-[clamp(3.4rem,6.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.88] text-white">
+      <div class="bg-base-900 dark:bg-base-900 px-10 pt-12 pb-10 lg:px-14 lg:pt-16 lg:pb-12">
+        <h1 class="text-[clamp(3.4rem,6.5vw,7rem)] font-black tracking-[-0.04em] leading-[0.88] text-white dark:text-white">
           Marius<br />Borsu<br />Lefevre
         </h1>
       </div>
 
       <!-- ② Bio — top-right -->
-      <div class="bg-[#111111] px-10 py-12 lg:px-14 lg:py-14">
-        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25 mb-6">About</p>
-        <p class="text-[1.05rem] lg:text-[1.15rem] text-white/55 leading-[1.9] font-light tracking-[-0.005em]">
+      <div class="bg-base-900 dark:bg-base-900 px-10 py-12 lg:px-14 lg:py-14">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-base-600 dark:text-base-600 mb-6">About</p>
+        <p class="text-[1.05rem] lg:text-[1.15rem] text-base-500 dark:text-base-400 leading-[1.9] font-light tracking-[-0.005em]">
           Aerospace engineer with a double degree from ISAE&#8209;Supaero and Imperial College London.
           I build at the edge of deep tech, product design, and venture &mdash; from UAV systems and
           AI models to startups and investment strategy. Always learning, always iterating.<span class="intro-cursor ml-px">&#9612;</span>
@@ -40,29 +40,29 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
       </div>
 
       <!-- ③ Portfolio + arrow — bottom-left -->
-      <div class="bg-[#111111] px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14 flex flex-col justify-between gap-10">
-        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25">Portfolio</p>
+      <div class="bg-base-900 dark:bg-base-900 px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14 flex flex-col justify-between gap-10">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-base-600 dark:text-base-600">Portfolio</p>
         <!-- Down arrow -->
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white/20">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-base-500 dark:text-base-600">
           <path d="M14 4V24M14 24L5 15M14 24L23 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
 
       <!-- ④ Education — bottom-right -->
-      <div class="bg-[#111111] px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14">
-        <p class="text-[9px] tracking-[0.35em] uppercase text-white/25 mb-8">Education</p>
+      <div class="bg-base-900 dark:bg-base-900 px-10 pt-8 pb-10 lg:px-14 lg:pt-10 lg:pb-14">
+        <p class="text-[9px] tracking-[0.35em] uppercase text-base-600 dark:text-base-600 mb-8">Education</p>
         <div class="flex flex-col gap-6">
           <div>
-            <p class="text-sm font-semibold text-white/80 leading-snug">ISAE-Supaero</p>
-            <p class="text-xs text-white/35 mt-0.5 tracking-wide">MEng Aerospace Engineering &middot; 2022–2025</p>
+            <p class="text-sm font-semibold text-base-100 dark:text-base-100 leading-snug">ISAE-Supaero</p>
+            <p class="text-xs text-base-500 dark:text-base-600 mt-0.5 tracking-wide">MEng Aerospace Engineering &middot; 2022–2025</p>
           </div>
           <div>
-            <p class="text-sm font-semibold text-white/80 leading-snug">Imperial College London</p>
-            <p class="text-xs text-white/35 mt-0.5 tracking-wide">MSc Innovation &amp; Technology Management &middot; 2025–2026</p>
+            <p class="text-sm font-semibold text-base-100 dark:text-base-100 leading-snug">Imperial College London</p>
+            <p class="text-xs text-base-500 dark:text-base-600 mt-0.5 tracking-wide">MSc Innovation &amp; Technology Management &middot; 2025–2026</p>
           </div>
           <div>
-            <p class="text-sm font-semibold text-white/80 leading-snug">Bocconi University</p>
-            <p class="text-xs text-white/35 mt-0.5 tracking-wide">Exchange — Finance &amp; Strategy &middot; 2024</p>
+            <p class="text-sm font-semibold text-base-100 dark:text-base-100 leading-snug">Bocconi University</p>
+            <p class="text-xs text-base-500 dark:text-base-600 mt-0.5 tracking-wide">Exchange — Finance &amp; Strategy &middot; 2024</p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
     content: '';
     position: absolute;
     background: #ffffff;
-    opacity: 0.35;
+    opacity: 0.2;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
@@ -98,7 +98,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
     50%       { opacity: 0; }
   }
   .intro-cursor {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.15);
     animation: intro-blink 1.1s step-start infinite;
   }
 </style>

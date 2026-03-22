@@ -115,8 +115,8 @@ body {
   border-radius: 20px;
   /* No overflow:hidden here — it clips transform:scale on hover.
      The image inside carries its own rounded corners. */
-  background-color: #1c1c1e;
-  color: #f5f5f7;
+  background-color: #262626;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   text-decoration: none;
@@ -127,7 +127,7 @@ body {
 }
 .apple-tile:hover {
   transform: scale(1.018);
-  background-color: #2c2c2e;
+  background-color: #404040;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 /* Clip inner content to the tile's rounded corners */
@@ -137,7 +137,7 @@ body {
 }
 /* kept for back-compat */
 .apple-tile-dark {
-  background-color: #1c1c1e;
+  background-color: #262626;
 }
 /* Logo inside a tile: grey at rest, white on tile hover */
 .apple-tile .tile-logo {
