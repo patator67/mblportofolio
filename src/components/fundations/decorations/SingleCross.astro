@@ -1,20 +1,23 @@
 ---
-// Single decorative cross for between sections
+// Decorative separator with left and right crosses and connecting line
 ---
 
-<div class="flex justify-center py-12">
-  <span class="single-cross"></span>
+<div class="flex items-center justify-center gap-6 py-16 lg:py-20 px-6">
+  <span class="side-cross"></span>
+  <div class="flex-1 h-px bg-white/15"></div>
+  <span class="side-cross"></span>
 </div>
 
 <style>
-  .single-cross {
+  .side-cross {
     position: relative;
     display: block;
     width: 0;
     height: 0;
+    flex-shrink: 0;
   }
-  .single-cross::before,
-  .single-cross::after {
+  .side-cross::before,
+  .side-cross::after {
     content: '';
     position: absolute;
     background: #ffffff;
@@ -23,6 +26,6 @@
     left: 0;
     transform: translate(-50%, -50%);
   }
-  .single-cross::before { width: 48px; height: 1px; }
-  .single-cross::after  { width: 1px;  height: 48px; }
+  .side-cross::before { width: 32px; height: 1px; }
+  .side-cross::after  { width: 1px;  height: 32px; }
 </style>
