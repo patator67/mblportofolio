@@ -1,88 +1,53 @@
 ---
 // Foundations
-import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-const info = [
-  {
-    period: "Languages",
-    title: "French, English, Spanish, Italian, Mandarin",
-    description: "Native French. C2 English. B2 Spanish. A2 Italian. Currently A1 Mandarin Chinese — started studying in 2023, focused on tones, Pinyin and character recognition. Drawn to the logic of Chinese writing and the precision required for tonal accuracy.",
-    category: { label: "Multilingual" },
-  },
-  {
-    period: "Technical",
-    title: "Python, MATLAB, R, SQL, C++, VBA",
-    description: "Engineering simulation (Simulink, FEA), data analytics, machine learning, financial modeling, Excel VBA, PowerPoint.",
-    category: { label: "Engineering & Data" },
-  },
-  {
-    period: "Domain",
-    title: "Aerospace / Finance / Deep Tech",
-    description: "Startup screening, market analysis, DCF & multiples valuation, fund modeling, IP strategy, dual-use tech assessment, aerospace systems engineering.",
-    category: { label: "Cross-Domain" },
-  },
-  {
-    period: "Interests",
-    title: "Technology / Design / Sport",
-    description: "3D design & printing, computing, sailing, cycling, tennis.",
-    category: { label: "Personal" },
-  },
-  {
-    period: "2023 – 2024",
-    title: "Teaching Assistant, Imperial College",
-    description: "Mentored engineering undergraduates in Engineering Practice and Mathematics. Held weekly sessions, gave feedback on projects, and supported coursework assessments.",
-    category: { label: "Education" },
-  },
-  {
-    period: "2019 – 2023",
-    title: "Volunteer, Ecole de la Paix Brussels",
-    description: "Educational support and mentorship to underprivileged children in Brussels. Ran sessions on maths, reading comprehension and general school support over four years.",
-    category: { label: "Volunteering" },
-  },
-];
+// Data
+import { infoSections } from "@/data/skills";
 ---
 
-<section class="scroll-mt-20" id="speaking">
+<section class="scroll-mt-20" id="info">
   <Wrapper variant="standard" class="py-12 lg:py-16">
-    <p class="text-xs tracking-widest uppercase text-base-400 dark:text-base-500 mb-3">Skills + Extra</p>
+    <p class="text-xs tracking-widest uppercase text-base-400 dark:text-base-500 mb-3">Knowledge & Interests</p>
     <h2 class="text-[clamp(1.75rem,5vw,3.5rem)] font-bold tracking-tighter text-base-900 dark:text-white leading-none mb-4">
       Info.
     </h2>
-    <div class="h-px bg-base-900 dark:bg-base-100 mb-6"></div>
+    <div class="h-px bg-base-900 dark:bg-base-100 mb-8"></div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col gap-12 lg:gap-16">
       {
-        info.map((item) => (
-          <div class="hover-row border-b border-base-200 dark:border-base-800 -mx-6 lg:-mx-12 px-6 lg:px-12">
-            <!-- Always-visible header row -->
-            <div class="py-8 lg:py-10 grid grid-cols-1 gap-3 lg:grid-cols-12 items-center">
-              <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest lg:col-span-2">
-                {item.period}
-              </Text>
-              <Text tag="h3" variant="textLG" class="text-base-900 dark:text-white font-semibold lg:col-span-4">
-                {item.title}
-              </Text>
-              <div class="lg:col-span-2 lg:col-start-11 lg:text-right">
-                <Text tag="p" variant="textXS" class="text-base-400 dark:text-base-500 uppercase tracking-widest font-semibold">
-                  {item.category.label}
-                </Text>
-              </div>
+        infoSections.map((section) => (
+          <div>
+            <!-- Section category header -->
+            <p class="text-xs tracking-widest uppercase font-semibold text-base-400 dark:text-base-500 mb-6">
+              {section.category}
+            </p>
+
+            <!-- Section items -->
+            <div class="flex flex-col gap-6">
+              {
+                section.items.map((item) => (
+                  <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-6">
+                    <!-- Title (left side) -->
+                    <div class="lg:col-span-4">
+                      <p class="text-base font-semibold text-base-900 dark:text-white leading-snug">
+                        {item.title}
+                      </p>
+                    </div>
+                    <!-- Description (right side) -->
+                    <div class="lg:col-span-8">
+                      <p class="text-sm text-base-500 dark:text-base-400 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
 
-            <!-- Hover-revealed description -->
-            <div class="reveal-panel">
-              <div class="reveal-inner">
-                <div class="reveal-content pb-8 lg:pb-10 grid grid-cols-1 lg:grid-cols-12">
-                  <Text
-                    tag="p"
-                    variant="textSM"
-                    class="text-base-500 dark:text-base-400 lg:col-span-6 lg:col-start-3"
-                  >
-                    {item.description}
-                  </Text>
-                </div>
-              </div>
-            </div>
+            <!-- Divider between sections (except last) -->
+            {section !== infoSections[infoSections.length - 1] && (
+              <div class="h-px bg-base-200 dark:bg-base-800 mt-8 lg:mt-10"></div>
+            )}
           </div>
         ))
       }

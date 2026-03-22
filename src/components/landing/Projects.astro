@@ -7,65 +7,28 @@ import imgAvd from "@/images/projects/vehicledesignproject.jpeg";
 import imgPrint from "@/images/projects/3dprintingproject.jpg";
 import imgLutlab from "@/images/projects/lutlabproject.png";
 import imgDiy from "@/images/projects/diyproject.png";
+// Data
+import { projects } from "@/data/projects";
 // Fundations
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 
-const featuredProjects = [
-  {
-    slug: "uav-coastal-surveillance",
-    year: "2024",
-    title: "UAV Coastal Surveillance",
-    description: "Autonomous UAV platform for coastal surveillance missions — Imperial College London.",
-    category: "Aerospace Systems",
-    image: imgUav,
-    imageAlt: "UAV coastal surveillance group design project.",
-  },
-  {
-    slug: "ai-ticket-forecasting",
-    year: "2023",
-    title: "AI Ticket Forecasting",
-    description: "Airline fare prediction model using ML and web-scraped historical data — ISAE-SUPAERO.",
-    category: "Machine Learning",
-    image: imgPrice,
-    imageAlt: "AI ticket price forecasting model.",
-  },
-  {
-    slug: "avd-project",
-    year: "2024",
-    title: "AVD Project",
-    description: "Advanced Vehicle Design — structural and aerodynamic integration study.",
-    category: "Vehicle Design",
-    image: imgAvd,
-    imageAlt: "Advanced Vehicle Design project.",
-  },
-  {
-    slug: "3d-printing",
-    year: "2023",
-    title: "3D Printing",
-    description: "Parametric design, material testing, and additive manufacturing of functional parts.",
-    category: "Fabrication",
-    image: imgPrint,
-    imageAlt: "3D printing personal projects.",
-  },
-  {
-    slug: "lutlab",
-    year: "2025",
-    title: "LutLab",
-    description: "Photo software simulating film aesthetics and polaroid frames for digital images.",
-    category: "Software",
-    image: imgLutlab,
-    imageAlt: "LutLab film simulation software.",
-  },
-  {
-    slug: "diy-projects",
-    year: "Ongoing",
-    title: "DIY Projects",
-    description: "Personal builds, experiments, and side projects — engineering meets craft.",
-    category: "DIY",
-    image: imgDiy,
-    imageAlt: "DIY projects collection.",
-  },
-];
+const imageMap: Record<string, ImageMetadata> = {
+  "uav-coastal-surveillance": imgUav,
+  "ai-ticket-forecasting": imgPrice,
+  "avd-project": imgAvd,
+  "3d-printing": imgPrint,
+  "lutlab": imgLutlab,
+  "diy-projects": imgDiy,
+};
+
+const imageAltMap: Record<string, string> = {
+  "uav-coastal-surveillance": "UAV coastal surveillance group design project.",
+  "ai-ticket-forecasting": "AI ticket price forecasting model.",
+  "avd-project": "Advanced Vehicle Design project.",
+  "3d-printing": "3D printing personal projects.",
+  "lutlab": "LutLab film simulation software.",
+  "diy-projects": "DIY projects collection.",
+};
 ---
 
 <section class="scroll-mt-20" id="projects">
@@ -79,7 +42,7 @@ const featuredProjects = [
 
   <!-- Responsive tile grid: 1 col → 2 col → 3 col -->
   <Wrapper variant="standard" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pb-12 lg:pb-16">
-    {featuredProjects.map((project) => (
+    {projects.map((project) => (
       <a
         href={"/projects/" + project.slug}
         data-modal-open={"project-" + project.slug}
@@ -111,8 +74,8 @@ const featuredProjects = [
           <Image
             width={600}
             height={340}
-            src={project.image}
-            alt={project.imageAlt}
+            src={imageMap[project.slug]}
+            alt={imageAltMap[project.slug]}
             loading="lazy"
             decoding="async"
             class="w-full object-cover aspect-video"

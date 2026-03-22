@@ -54,7 +54,7 @@ const logoClass: Record<string, string> = {
 
   <!-- Responsive tile grid: 1 col → 3 col -->
   <Wrapper variant="standard" class="grid grid-cols-1 lg:grid-cols-3 gap-3 pb-12 lg:pb-16">
-    {workEntries.map((entry) => (
+    {workEntries.filter((entry) => imageMap[entry.slug]).map((entry) => (
       <a
         href={"/work/" + entry.slug}
         data-modal-open={"work-" + entry.slug}
@@ -64,23 +64,25 @@ const logoClass: Record<string, string> = {
       >
         <div class="p-8 flex flex-col flex-1">
           <!-- Logo area: fixed height so text always starts at same level -->
-          <div class="flex justify-center items-center h-24 w-full mb-6">
-            <span
-              onclick="event.preventDefault(); event.stopPropagation(); window.open(this.dataset.href, '_blank', 'noopener,noreferrer')"
-              data-href={entry.website}
-              role="link"
-              tabindex="0"
-              class="tile-logo flex justify-center items-center cursor-pointer"
-            >
-              <Image
-                src={logoMap[entry.slug]}
-                alt={entry.company + " logo"}
-                width={logoWidth[entry.slug]}
-                height={logoHeight[entry.slug]}
-                class={logoClass[entry.slug]}
-              />
-            </span>
-          </div>
+          {logoMap[entry.slug] && (
+            <div class="flex justify-center items-center h-24 w-full mb-6">
+              <span
+                onclick="event.preventDefault(); event.stopPropagation(); window.open(this.dataset.href, '_blank', 'noopener,noreferrer')"
+                data-href={entry.website}
+                role="link"
+                tabindex="0"
+                class="tile-logo flex justify-center items-center cursor-pointer"
+              >
+                <Image
+                  src={logoMap[entry.slug]}
+                  alt={entry.company + " logo"}
+                  width={logoWidth[entry.slug]}
+                  height={logoHeight[entry.slug]}
+                  class={logoClass[entry.slug]}
+                />
+              </span>
+            </div>
+          )}
           <!-- Category -->
           <p class="text-xs tracking-widest uppercase font-semibold text-base-400 dark:text-base-500 mb-2">{entry.category}</p>
           <!-- Description -->

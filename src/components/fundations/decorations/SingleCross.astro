@@ -2,7 +2,7 @@
 // Decorative separator with left and right crosses and connecting line
 ---
 
-<div class="flex items-center justify-center gap-12 py-12 lg:py-14 px-6">
+<div class="flex items-center justify-center gap-12 py-12 lg:py-14 px-6" style="align-items: center;">
   <span class="side-cross"></span>
   <div class="flex-1 h-px bg-white/15 max-w-2xl"></div>
   <span class="side-cross"></span>
@@ -11,7 +11,7 @@
 <style>
   .side-cross {
     position: relative;
-    display: block;
+    display: inline-flex;
     width: 0;
     height: 0;
     flex-shrink: 0;
@@ -21,7 +21,7 @@
     content: '';
     position: absolute;
     background: #ffffff;
-    opacity: 0.15;
+    opacity: 0.2;
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
