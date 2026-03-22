@@ -11,7 +11,6 @@ import logoAco from "@/images/logos/aco.png";
 import { workEntries } from "@/data/work";
 // Fundations
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-import BlockCrosses from "@/components/fundations/decorations/BlockCrosses.astro";
 
 const imageMap: Record<string, ImageMetadata> = {
   starburst: imgStarburst,
@@ -46,10 +45,9 @@ const logoClass: Record<string, string> = {
 
 <section class="scroll-mt-20" id="work">
   <!-- Apple-style section header -->
-  <Wrapper variant="standard" class="pt-24 pb-6 relative">
-    <BlockCrosses />
+  <Wrapper variant="standard" class="pt-24 pb-6">
     <p class="text-xs tracking-widest uppercase text-base-400 dark:text-base-500 mb-3">Experience</p>
-    <h2 class="text-[clamp(2.5rem,7vw,5.5rem)] font-bold tracking-tighter text-base-900 dark:text-white leading-none">
+    <h2 class="text-[clamp(1.75rem,5vw,3.5rem)] font-bold tracking-tighter text-base-900 dark:text-white leading-none">
       Work.
     </h2>
   </Wrapper>

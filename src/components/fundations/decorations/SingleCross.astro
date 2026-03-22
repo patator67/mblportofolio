@@ -1,0 +1,28 @@
+---
+// Single decorative cross for between sections
+---
+
+<div class="flex justify-center py-12">
+  <span class="single-cross"></span>
+</div>
+
+<style>
+  .single-cross {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+  }
+  .single-cross::before,
+  .single-cross::after {
+    content: '';
+    position: absolute;
+    background: #ffffff;
+    opacity: 0.15;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+  }
+  .single-cross::before { width: 48px; height: 1px; }
+  .single-cross::after  { width: 1px;  height: 48px; }
+</style>

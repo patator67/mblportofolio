@@ -112,7 +112,7 @@ body {
 
 /* ─── Apple-style feature tiles ───────────────────────────── */
 .apple-tile {
-  border-radius: 0px;
+  border-radius: 4px;
   /* No overflow:hidden here — it clips transform:scale on hover.
      The image inside carries its own rounded corners. */
   background-color: #262626;
@@ -132,7 +132,7 @@ body {
 }
 /* Clip inner content to the tile's corners */
 .apple-tile-inner {
-  border-radius: 0px;
+  border-radius: 4px;
   overflow: hidden;
 }
 /* kept for back-compat */

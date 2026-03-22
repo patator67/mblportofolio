@@ -7,15 +7,21 @@ import Work from "@/components/landing/Work.astro";
 import Projects from "@/components/landing/Projects.astro";
 import Education from "@/components/landing/Education.astro";
 import Speaking from "@/components/landing/Speaking.astro";
+// Decorations
+import SingleCross from "@/components/fundations/decorations/SingleCross.astro";
 // Modal overlay
 import DetailModal from "@/components/global/DetailModal.astro";
 ---
 
 <BaseLayout>
   <Intro />
+  <SingleCross />
   <Work />
+  <SingleCross />
   <Projects />
+  <SingleCross />
   <Education />
+  <SingleCross />
   <Speaking />
   <DetailModal />
 </BaseLayout>

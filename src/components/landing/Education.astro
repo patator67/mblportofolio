@@ -3,7 +3,6 @@
 import { Image } from "astro:assets";
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-import BlockCrosses from "@/components/fundations/decorations/BlockCrosses.astro";
 // Logos
 import logoBocconi from "@/images/logos/bocconi.png";
 import logoImperial from "@/images/logos/imperial.png";
@@ -116,8 +115,7 @@ const education = [
 ---
 
 <section class="scroll-mt-20" id="education">
-  <Wrapper variant="standard" class="py-20 lg:py-32 relative">
-    <BlockCrosses />
+  <Wrapper variant="standard" class="py-20 lg:py-32">
     <div class="flex items-baseline justify-between mb-2">
       <Text tag="h2" variant="displayMD" class="font-bold text-base-900 dark:text-white uppercase tracking-tight">
         Education
